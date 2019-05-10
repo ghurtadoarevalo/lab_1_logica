@@ -56,6 +56,23 @@ list_min2(X, Y, [Z|Zs]):-
           Z >= Y,
           list_min2(X, Y, Zs).
 
+
+install(X):-
+   (   X == si
+   ->  true
+   ;   false).
+
+
+
+%Considerando que el min de cantidad chocolate es 15gr.
+sePuedeUsar(Instalada, CantidadAgua, CantidadCafe, CantidadLeche, CantidadChocolate):-
+   install(Instalada),
+   CantidadAgua >= 150,
+   CantidadCafe >= 30,
+   CantidadLeche >= 30,
+   CantidadChocolate >= 15.
+
+
 prepararCafe(TamanoTaza, TipoPreparacion, TipoCafe, EstacionAno, Salida):-
    preparation(TipoPreparacion, Ingredients),
    grain(TipoCafe, Grain),
