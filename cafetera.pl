@@ -6,7 +6,7 @@ grain(descafeinado, suave).
 % ----------------------------------------------------------------------
 %
 % ----------------------------------------------------------------------
-% Hechos para la preparación.
+% Hechos para la preparaciï¿½n.
 preparation(espresso, [7,0,0,30]).
 preparation(americano, [7,0,0,60]).
 preparation(cortado, [7,3,0,50]).
@@ -26,7 +26,7 @@ cup(pequena,0.5).
 % ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
-% Hechos para la estación del año.
+% Hechos para la estaciï¿½n del aï¿½o.
 season(verano, 60).
 season(primavera, 90).
 season(invierno, 120).
@@ -40,13 +40,13 @@ season(otono, 90).
 
 
 % ----------------------------------------------------------------------
-% Función que multiplica todos los elemento de una lista
-% por una variable numérica. Lo deja en formato float la nueva lista.
+% Funciï¿½n que multiplica todos los elemento de una lista
+% por una variable numï¿½rica. Lo deja en formato float la nueva lista.
 
 % Ej: Lista = [1,2,3,4] , Value = 2  => Salida = [2.0,4.0,6.0,8.0]
 
-% Entrada: Lista con números, Lista Salida, Valor numérico.
-% Salida: Lista con numeros multiplicados por el valor numérico
+% Entrada: Lista con nï¿½meros, Lista Salida, Valor numï¿½rico.
+% Salida: Lista con numeros multiplicados por el valor numï¿½rico
 % (float).
 multByValueFloat([],[], _Value).
 multByValueFloat([X|Xs],[Y|Ys], Value) :-
@@ -55,13 +55,13 @@ multByValueFloat([X|Xs],[Y|Ys], Value) :-
 % ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
-% Función que multiplica todos los elemento de un lista
-% por una variable numérica. Lo deja en formato entero la nueva lista.
+% Funciï¿½n que multiplica todos los elemento de un lista
+% por una variable numï¿½rica. Lo deja en formato entero la nueva lista.
 
 % Ej: Lista = [1,2,3,4] , Value = 2  => Salida = [2,4,6,8]
 
-% Entrada: Lista con números, Lista Salida, Valor numérico.
-% Salida: Lista con numeros multiplicados por el valor numérico
+% Entrada: Lista con nï¿½meros, Lista Salida, Valor numï¿½rico.
+% Salida: Lista con numeros multiplicados por el valor numï¿½rico
 multByValue([],[], _Value).
 multByValue([X|Xs],[Y|Ys], Value) :-
    multByValue(Xs,Ys, Value),
@@ -69,13 +69,13 @@ multByValue([X|Xs],[Y|Ys], Value) :-
 % ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
-% Función que divide todos los elementos de una lista por los de otra
+% Funciï¿½n que divide todos los elementos de una lista por los de otra
 % lista.
 
 % Ej: Lista1 = [10,20,30,40],Lista2 = [5,2,3,2] => Salida = [2,10,10,20]
 
 % Entrada: Lista 1, Lista 2, Lista de salida.
-% Salida: Lista con los resultados de la división.
+% Salida: Lista con los resultados de la divisiï¿½n.
 divList([],[],[]).
 divList([X|Xs],[Y|Ys], [Z|Zs]) :-
    divList(Xs,Ys, Zs),
@@ -87,23 +87,23 @@ divList([X|Xs],[Y|Ys], [Z|Zs]) :-
 % ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
-% Función que agrega un elemento a una lista
+% Funciï¿½n que agrega un elemento a una lista
 
 % Ej: Lista 1 = [10,20,30], Elemento = 15 => Salida = [10,20,30,15]
 
 % Entrada: Lista 1, Elemento, Lista de salida.
-% Salida: Lista con los resultados de la división.
+% Salida: Lista con los resultados de la divisiï¿½n.
 appendTail([],X,[X]).
 appendTail([H|T],X,[H|L]):-appendTail(T,X,L).
 % ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
-% Función que entrega el mínimo elemento de una lista.
+% Funciï¿½n que entrega el mï¿½nimo elemento de una lista.
 
 % Ej: Lista 1 = [3,2,1,6,10] => Salida = 1
 
 % Entrada: Salida, Lista.
-% Salida: El menor número de la lista.
+% Salida: El menor nï¿½mero de la lista.
 listMin(M, [X|Xs]):-
          list_min2(M, X, Xs).
 
@@ -119,16 +119,33 @@ list_min2(X, Y, [Z|Zs]):-
           list_min2(X, Y, Zs).
 % ----------------------------------------------------------------------
 
+
+install(X):-
+   (   X == si
+   ->  true
+   ;   false).
+
+
+
+%Considerando que el min de cantidad chocolate es 15gr.
+sePuedeUsar(Instalada, CantidadAgua, CantidadCafe, CantidadLeche, CantidadChocolate):-
+   install(Instalada),
+   CantidadAgua >= 150,
+   CantidadCafe >= 30,
+   CantidadLeche >= 30,
+   CantidadChocolate >= 15.
+
+
 % ----------------------------------------------------------------------
-% Función que permite saber la cantidad de ingredientes, intensidad y
-% tiempo de prepraración de un café según ciertos parámetros.
+% Funciï¿½n que permite saber la cantidad de ingredientes, intensidad y
+% tiempo de prepraraciï¿½n de un cafï¿½ segï¿½n ciertos parï¿½metros.
 
 % Ej: mediana, capuccino, robusto, verano =>Salida = [7,19,0,150,fuerte,60]
 
-% Entrada: Tamaño taza, Tipo de preparación, Tipo de café, Estación del
-% año, Salida.
+% Entrada: Tamaï¿½o taza, Tipo de preparaciï¿½n, Tipo de cafï¿½, Estaciï¿½n del
+% aï¿½o, Salida.
 % Salida: Lista con la cantidad de ingredientes, intensidad y tiempo de
-% prepraración.
+% prepraraciï¿½n.
 prepararCafe(TamanoTaza, TipoPreparacion, TipoCafe, EstacionAno, Salida):-
    preparation(TipoPreparacion, Ingredients),
    grain(TipoCafe, Grain),
@@ -144,17 +161,17 @@ prepararCafe(TamanoTaza, TipoPreparacion, TipoCafe, EstacionAno, Salida):-
 % ----------------------------------------------------------------------
 
 % ----------------------------------------------------------------------
-% Función que permite saber la cantidad de tazas y el tiempo de
-% preparación que tomará al ingresar cierta cantidad de ingredientes y
-% otros parámetros.
+% Funciï¿½n que permite saber la cantidad de tazas y el tiempo de
+% preparaciï¿½n que tomarï¿½ al ingresar cierta cantidad de ingredientes y
+% otros parï¿½metros.
 
 % Ej: mediana, cortado, arabica, verano, 700, 200, 0, 3000 =>
 % Salida = [60, 3600].
 
-% Entrada: Tamaño taza, Tipo de preparación, Tipo de café, Estación del
-% año, Cantidad de cafe, Cantidad de leche, Cantidad de chocolate,
+% Entrada: Tamaï¿½o taza, Tipo de preparaciï¿½n, Tipo de cafï¿½, Estaciï¿½n del
+% aï¿½o, Cantidad de cafe, Cantidad de leche, Cantidad de chocolate,
 % Cantidad de Agua, Salida.
-% Salida: Lista con la cantidad de tazas y el tiempo de prepraración.
+% Salida: Lista con la cantidad de tazas y el tiempo de prepraraciï¿½n.
 cantidadTazas(TamanoTaza, TipoPreparacion, _TipoCafe, EstacionAno, CantidadCafe, CantidadLeche, CantidadChocolate, CantidadAgua, Salida):-
    preparation(TipoPreparacion, Ingredients),
    cup(TamanoTaza, Cup),
