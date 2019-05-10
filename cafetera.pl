@@ -19,10 +19,16 @@ season(primavera, 90).
 season(invierno, 120).
 season(otono, 90).
 
+multByValueFloat([],[], _Value).
+multByValueFloat([X|Xs],[Y|Ys], Value) :-
+   multByValueFloat(Xs,Ys, Value),
+   Y is float(X * Value).
+
 multByValue([],[], _Value).
 multByValue([X|Xs],[Y|Ys], Value) :-
    multByValue(Xs,Ys, Value),
-   Y is float(X * Value).
+   Y is X * Value.
+
 
 divList([],[],[]).
 divList([X|Xs],[Y|Ys], [Z|Zs]) :-
@@ -34,7 +40,7 @@ divList([X|Xs],[Y|Ys], [Z|Zs]) :-
       ;   Z is float(X/Y)).
 
 appendTail([],X,[X]).
-appendTail([H|T],X,[H|L]):-append(T,X,L).
+appendTail([H|T],X,[H|L]):-appendTail(T,X,L).
 
 listMin(M, [X|Xs]):-
          list_min2(M, X, Xs).
@@ -64,12 +70,11 @@ prepararCafe(TamanoTaza, TipoPreparacion, TipoCafe, EstacionAno, Salida):-
    appendTail(NewValue2, Season, Salida).
 
 
-
 cantidadTazas(TamanoTaza, TipoPreparacion, TipoCafe, EstacionAno, CantidadCafe, CantidadLeche, CantidadChocolate, CantidadAgua, Salida):-
    preparation(TipoPreparacion, Ingredients),
    cup(TamanoTaza, Cup),
    season(EstacionAno, Season),
-   multByValue(Ingredients, NewIngredientsList, Cup),
+   multByValueFloat(Ingredients, NewIngredientsList, Cup),
    AllIngredients = [CantidadCafe, CantidadLeche, CantidadChocolate, CantidadAgua],
    divList(AllIngredients, NewIngredientsList, DividedList),
    listMin(Min, DividedList),
